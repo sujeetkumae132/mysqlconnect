@@ -6,6 +6,7 @@ scikit-learn
 boto3
 PyYAML
 types-PyYAML
+mypy
 
 # dev requirements -
 pytest==7.1.3
