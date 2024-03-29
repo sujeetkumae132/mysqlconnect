@@ -4,30 +4,25 @@ import os
 from pathlib import Path
 import logging
 
+python_package="mysql_connect"
+
 ## creating a list of files
 
 files_list=[
-    ".github/workflows/.gitkeep",                   ### ".gitkeep" we use for continous integration and continous deployement
-    "src/__init__.py",                              ### "src" folders contains all the source code and "__init__" we use to consider the foldeer as module and call any file into any another folder
-    "src/components/__init__.py"                    ### "components" whatever stages we do for from data pipeline to testing, these all are contains multiple cmponents.thus e keep it here
-    "src/components/data_ingestion.py",
-    "src/components/data_transformation.py",
-    "src/pipeline/__init__.py",
-    "src/pipeline/training_pipeeline.py",
-    "src/pipeline/prediction_pipeline.py",
-    "src/pipeline/model_evaluation.py",
-    "src/pipeline/model_trainer.py",
-    "src/utils/__init__.py",
-    "src/utils/utils.py",
-    "src/logger/logging.py",
-    "src/exception/exception.py",
+    ".github/workflows/ci.yaml",                  
+    "src/__init__.py",                              
+    f"src/{python_package}/__init__.py"                    
+    "src/{python_package}/mysql_crud.py",
+    "test/__init__.py"
     "tests/unit/__init__.py",
+    "test/unit/unit.py"                                 ##here we'll write all the test cases
     "tests/integration/__init__.py",
-    "init_setup.sh",
-    "requirements.txt",
-    "requirements_dev.txt",                          ### this file for devlopment environment
+    "test/integration/int.py",                          ## here we'll write all the test cases for integration purpose
+    "init_setup.sh",                                    ## here we'll write all the shell/linux command                      
+    "requirements.txt",                                 ## it is for the user environment where test cases not required
+    "requirements_dev.txt",                             ## this will be for the devlopment environment only it means for local. because test cases we don't use in user environment    
     "setup.py",
-    "setup.cfg",
+    "setup.cfg",                                        ## this file is used by setuptools to configre the packaging and installation of a python project
     "pyproject.toml",
     "tox.ini",
     "experiment/experiments.ipynb"

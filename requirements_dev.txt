@@ -1,0 +1,13 @@
+pandas
+numpy
+ensure
+sqlalchemy
+scikit-learn
+
+
+# dev requirements -
+pytest==7.1.3
+tox==3.25.1             # using "tox" we test our code in different different environment
+black==22.8.0           # it is a linting tool.it check all the indentation.
+flake8==5.0.4           # it is also using for the same reasom for linting
+mypy==0.971
