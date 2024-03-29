@@ -10,26 +10,26 @@ class ReadYMLFile:
         self.ymlfilepath=ymlfilepathwithname
     
     def read_yml_file(self):
-        file=self.ymlfilepath
-        with open(file,'r') as f:
+        filename=self.ymlfilepath
+        with open(filename,'r') as f:
             yamlfile=yaml.safe_load(f)
         return yamlfile
     
 class MySqlConnectWithoutConfig:
-    def __init__(self,secret_name:str,region_name:str,aws_access_key_id:str,
-                 aws_secret_access_key:str,db_name:str):
-        self.secret_name=secret_name
-        self.region_name=region_name
-        self.aws_access_key_id=aws_access_key_id
-        self.aws_secret_access_key=aws_secret_access_key
-        self.db_name=db_name
+    def __init__(self,secret_name_i:str,region_name_i:str,aws_access_key_id_i:str,
+                 aws_secret_access_key_i:str,db_name_i:str):
+        self.secret_name_o=secret_name_i
+        self.region_name_o=region_name_i
+        self.aws_access_key_id_o=aws_access_key_id_i
+        self.aws_secret_access_key_o=aws_secret_access_key_i
+        self.db_name_o=db_name_i
         
     def get_secret(self):
         # Create a Secrets Manager client
-        session = boto3.session.Session(aws_access_key_id=self.aws_access_key_id,
-        aws_secret_access_key=self.aws_secret_access_key,region_name=self.region_name)
-        client = session.client(service_name="secretsmanager", region_name=self.region_name)
-        return client.get_secret_value(SecretId=self.secret_name)["SecretString"]
+        session = boto3.session.Session(aws_access_key_id=self.aws_access_key_id_o,
+        aws_secret_access_key=self.aws_secret_access_key_o,region_name=self.region_name_o)
+        client = session.client(service_name="secretsmanager", region_name=self.region_name_o)
+        return client.get_secret_value(SecretId=self.secret_name_o)["SecretString"]
 
     def create_engine_conn(self):
         dbname=self.db_name
