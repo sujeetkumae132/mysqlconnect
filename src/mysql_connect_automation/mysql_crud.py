@@ -51,8 +51,7 @@ class MySqlConnectWithoutConfig:
     
     def save_data_to_db(self,dbname,dataframe,tablefilename,ifexists="append"):
         '''
-        this function will use dataframe.to_sql function to save the dataframe into database
-        
+        this function will use dataframe.to_sql function to save the dataframe into database    
         dbname: database name where the file to be save 
         dataframe: it should be a DataFrame and 
                     there should not be any "id" column consist int the dataframe
@@ -64,5 +63,5 @@ class MySqlConnectWithoutConfig:
         start_number = 1 
         dataframe.reset_index(drop=True, inplace=True)
         dataframe.index += start_number
-        dataframe.to_sql(name= tablefilename, con=engineconnect, if_exists=ifexists, index=True,index_label='id')
+        dataframe.to_sql(name=tablefilename,con=engineconnect,if_exists=ifexists,index=True,index_label='id')
         return {"msg":"file sucessfully inserted"}
