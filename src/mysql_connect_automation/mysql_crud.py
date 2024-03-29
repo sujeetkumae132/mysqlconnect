@@ -2,13 +2,10 @@ from sqlalchemy import create_engine
 import boto3
 import json
 import yaml
-class ReadYMLFile():
-    
+class ReadYMLFile:   
     def __init__(self,ymlfilepathwithname):
         '''
-        ymlfilepathwithname: it should contains the path with file name
-            ex: "D:\\Optimeyes\\credentials.yaml"
-        
+        ymlfilepathwithname: it should contains the path with file name        
         '''
         self.ymlfilepath=ymlfilepathwithname
     
@@ -18,8 +15,9 @@ class ReadYMLFile():
             yamlfile=yaml.safe_load(f)
         return yamlfile
     
-class MySqlConnectWithoutConfig():
-    def __init__(self,secret_name:str,region_name:str,aws_access_key_id:str,aws_secret_access_key:str,db_name:str):
+class MySqlConnectWithoutConfig:
+    def __init__(self,secret_name:str,region_name:str,aws_access_key_id:str,
+                 aws_secret_access_key:str,db_name:str):
         self.secret_name=secret_name
         self.region_name=region_name
         self.aws_access_key_id=aws_access_key_id
