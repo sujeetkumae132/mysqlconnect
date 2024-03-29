@@ -65,4 +65,4 @@ class MySqlConnectWithoutConfig:
         dataframe.reset_index(drop=True, inplace=True)
         dataframe.index += start_number
         dataframe.to_sql(name= tablefilename, con=engineconnect, if_exists=ifexists, index=True,index_label='id')
-        return f"datafraame sucessfully inserted into the database"
+        return f"{tablefilename} dataframe sucessfully inserted into the database"
