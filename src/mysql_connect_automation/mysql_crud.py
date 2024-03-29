@@ -20,20 +20,20 @@ class ReadYMLFile():
     
 class MySqlConnectWithoutConfig():
     def __init__(self,secret_name:str,region_name:str,aws_access_key_id:str,aws_secret_access_key:str):
-        self.AWS_SECRET_NAME=secret_name
-        self.AWS_REGION_SECRET=region_name
-        self.AWS_ACCESS_KEY_ID=aws_access_key_id
-        self.AWS_SECRET_ACCESS_KEY=aws_secret_access_key
+        self.secret_name=secret_name
+        self.region_name=region_name
+        self.aws_access_key_id=aws_access_key_id
+        self.aws_secret_access_key=aws_secret_access_key
         
-    def get_secret(self,secret_name, region_name,aws_access_key_id,aws_secret_access_key):
+    def get_secret(self):
         # Create a Secrets Manager client
-        session = boto3.session.Session(aws_access_key_id=aws_access_key_id,
-        aws_secret_access_key=aws_secret_access_key,region_name=region_name)
-        client = session.client(service_name="secretsmanager", region_name=region_name)
-        return client.get_secret_value(SecretId=secret_name)["SecretString"]
+        session = boto3.session.Session(aws_access_key_id=self.aws_access_key_id,
+        aws_secret_access_key=self.aws_secret_access_key,region_name=self.region_name)
+        client = session.client(service_name="secretsmanager", region_name=self.region_name)
+        return client.get_secret_value(SecretId=self.secret_name)["SecretString"]
 
     def create_engine_conn(self,db_name):
-        secret_value = self.get_secret(self.AWS_SECRET_NAME,self.AWS_REGION_SECRET,self.AWS_ACCESS_KEY_ID, self.AWS_SECRET_ACCESS_KEY)
+        secret_value = self.get_secret()
         if secret_value:
             secret_data = json.loads(secret_value)
             rds_user = secret_data["username"]
