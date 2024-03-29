@@ -8,5 +8,5 @@ testpaths = [
     ]
 
 [tool.mypy]
-mypy_path = "src"
+mypy_path = "src/mysql_connect_automation"
 ignore_missing_imports = true
