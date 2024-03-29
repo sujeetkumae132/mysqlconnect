@@ -4,6 +4,8 @@ ensure
 sqlalchemy
 scikit-learn
 boto3
+PyYAML
+types-PyYAML
 
 # dev requirements -
 pytest==7.1.3
