@@ -19,11 +19,12 @@ class ReadYMLFile():
         return yamlfile
     
 class MySqlConnectWithoutConfig():
-    def __init__(self,secret_name:str,region_name:str,aws_access_key_id:str,aws_secret_access_key:str):
+    def __init__(self,secret_name:str,region_name:str,aws_access_key_id:str,aws_secret_access_key:str,db_name:str):
         self.secret_name=secret_name
         self.region_name=region_name
         self.aws_access_key_id=aws_access_key_id
         self.aws_secret_access_key=aws_secret_access_key
+        self.db_name=db_name
         
     def get_secret(self):
         # Create a Secrets Manager client
@@ -32,7 +33,8 @@ class MySqlConnectWithoutConfig():
         client = session.client(service_name="secretsmanager", region_name=self.region_name)
         return client.get_secret_value(SecretId=self.secret_name)["SecretString"]
 
-    def create_engine_conn(self,db_name):
+    def create_engine_conn(self):
+        dbname=self.db_name
         secret_value = self.get_secret()
         if secret_value:
             secret_data = json.loads(secret_value)
@@ -42,14 +44,14 @@ class MySqlConnectWithoutConfig():
             rds_port = secret_data["port"]
             
             engine = create_engine(
-                f"mysql+pymysql://{rds_user}:{rds_pass}@{rds_host}:{rds_port}/{db_name}"
+                f"mysql+pymysql://{rds_user}:{rds_pass}@{rds_host}:{rds_port}/{dbname}"
             )
         else:
             raise Exception("RDS Connection Failed")
             engine = None
         return engine
     
-    def save_data_to_db(self,dbname,dataframe,tablefilename,ifexists="append"):
+    def save_data_to_db(self,dbname,dataframe,tablefilename:str,ifexists:str="append"):
         '''
         this function will use dataframe.to_sql function to save the dataframe into database    
         dbname: database name where the file to be save 
@@ -59,7 +61,7 @@ class MySqlConnectWithoutConfig():
         ifexists: it define either want to replace the table to append the table
                     by default it is append,if needed can be change to "replace".
         '''
-        engineconnect=self.create_engine_conn(dbname)
+        engineconnect=self.create_engine_conn()
         start_number = 1 
         dataframe.reset_index(drop=True, inplace=True)
         dataframe.index += start_number
