@@ -4,4 +4,3 @@ ensure
 sqlalchemy
 scikit-learn
 boto3
-pyyaml
