@@ -2,8 +2,19 @@ from sqlalchemy import create_engine
 import boto3
 import json
 import yaml
-
-   
+class ReadYMLFile:   
+    def __init__(self,ymlfilepathwithname):
+        '''
+        ymlfilepathwithname: it should contains the path with file name        
+        '''
+        self.ymlfilepath=ymlfilepathwithname
+    
+    def read_yml_file(self):
+        filename=self.ymlfilepath
+        with open(filename,'r') as f:
+            yamlfile=yaml.safe_load(f)
+        return yamlfile
+    
 class MySqlConnectWithoutConfig:
     def __init__(self,secret_name_i:str,region_name_i:str,aws_access_key_id_i:str,
                  aws_secret_access_key_i:str,db_name_i:str):
@@ -38,7 +49,7 @@ class MySqlConnectWithoutConfig:
             engine = None
         return engine
     
-    def save_data_to_db(self,dbname,dataframe,tablefilename:str,ifexists:str="append"):
+    def save_data_to_db(self,dataframe,tablefilename:str,ifexists:str="append"):
         '''
         this function will use dataframe.to_sql function to save the dataframe into database    
         dbname: database name where the file to be save 

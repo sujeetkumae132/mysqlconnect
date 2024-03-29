@@ -6,11 +6,10 @@ scikit-learn
 boto3
 PyYAML
 types-PyYAML
-mypy
 
 # dev requirements -
-pytest==7.1.3
-tox==3.25.1             # using "tox" we test our code in different different environment
-black==22.8.0           # it is a linting tool.it check all the indentation.
-flake8==5.0.4           # it is also using for the same reasom for linting
-mypy==0.971
+pytest
+tox                    # using "tox" we test our code in different different environment
+black                  # it is a linting tool.it check all the indentation.
+flake8                 # it is also using for the same reasom for linting
+mypy

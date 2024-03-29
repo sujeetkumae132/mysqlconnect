@@ -6,4 +6,3 @@ scikit-learn
 boto3
 PyYAML
 types-PyYAML
-mypy
