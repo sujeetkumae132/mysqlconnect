@@ -4,5 +4,4 @@ ensure
 sqlalchemy
 scikit-learn
 boto3
-json
 yaml

@@ -3,6 +3,8 @@ numpy
 ensure
 sqlalchemy
 scikit-learn
+boto3
+yaml
 
 
 # dev requirements -
