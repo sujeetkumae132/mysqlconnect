@@ -32,7 +32,7 @@ class MySqlConnectWithoutConfig:
         return client.get_secret_value(SecretId=self.secret_name_o)["SecretString"]
 
     def create_engine_conn(self):
-        dbname=self.db_name
+        dbname=self.db_name_o
         secret_value = self.get_secret()
         if secret_value:
             secret_data = json.loads(secret_value)
